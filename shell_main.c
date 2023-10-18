@@ -1,6 +1,8 @@
 #include "shell.h"
 
 /**
+ * Auth: Alice Agyemang
+ *   Benjamin Kwame Oduro
  * main - Entry point for the shell
  * @argc: Number of arguments (unused)
  * @argv: Program arguments
