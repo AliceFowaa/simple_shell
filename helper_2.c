@@ -1,6 +1,8 @@
 #include "shell.h"
 
 /**
+ * Auth: Alice Agyemang
+ *   Benjamin Kwame Oduro
  * _strtok_r - tokenizes a string
  * @string: string to be tokenized
  * @delim: delimiter to be used to tokenize the string
