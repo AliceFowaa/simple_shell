@@ -1,6 +1,8 @@
 #include "shell.h"
 
 /**
+ * Auth: Alice Agyemang
+ *   Benjamin Kwame Oduro
  * _strcmp - compare two strings
  * @first: first string to be compared
  * @second: second string to be compared
