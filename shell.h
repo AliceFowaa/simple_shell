@@ -21,6 +21,8 @@
 #define min(x, y) (((x) < (y)) ? (x) : (y))
 
 /**
+ * Auth: Alice Agyemang
+ *   Benjamin Kwame Oduro
  *struct map - a struct that will map a command name to a function
  *
  *@command_name: name of the command
