@@ -1,6 +1,8 @@
 #include "shell.h"
 
 /**
+ * Auth: Alice Agyemang
+ *   Benjamin Kwame Oduro
  * non_interactive - handles non_interactive mode
  *
  * This function is responsible for processing commands in non-interactive mode
