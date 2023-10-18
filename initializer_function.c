@@ -1,6 +1,8 @@
 #include "shell.h"
 
 /**
+ * Auth: Alice Agyemang
+ *   Benjamin Kwame Oduro
  * initializer - starts executing everything
  * @current_command: try to check current token
  * @type_command: parse token
