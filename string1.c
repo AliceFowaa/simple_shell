@@ -1,6 +1,8 @@
 #include "shell.h"
 
 /**
+ * Auth: Alice Agyemang
+ *   Benjamin Kwame Oduro
  * _strcpy - Copies a string.
  * @dest: The destination.
  * @src: The source.
