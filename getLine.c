@@ -1,6 +1,8 @@
 #include "shell.h"
 
 /**
+ * Auth: Alice Agyemang
+ *   Benjamin Kwame Oduro
  * input_buf - buffers chained commands
  * @info: parameter struct
  * @buf: address of buffer
