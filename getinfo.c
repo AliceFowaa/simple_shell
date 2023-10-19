@@ -1,6 +1,8 @@
 #include "shell.h"
 
 /**
+ * Auth: Alice Agyemang
+ *   Benjamin Kwame Oduro
  * clear_info - Initializes info_t struct.
  * @info: Pointer to the struct to be cleared.
  */
