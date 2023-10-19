@@ -1,6 +1,8 @@
 #include "shell.h"
 
 /**
+ * Auth: Alice Agyemang
+ *   Benjamin Kwame Oduro
  * get_history_file - Get the history file name.
  * @info: Parameter struct.
  * Return: Allocated string containing the history file.
