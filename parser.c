@@ -1,6 +1,8 @@
 #include "shell.h"
 
 /**
+ * Auth: Alice Agyemang
+ *   Benjamin Kwame Oduro
  * is_cmd - Determines if a file is an executable command.
  * @info: The info struct.
  * @path: Path to the file.
