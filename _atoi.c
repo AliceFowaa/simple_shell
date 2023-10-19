@@ -1,6 +1,8 @@
 #include "shell.h"
 
 /**
+ * Auth: Alice Agyemang
+ *   Benjamin Kwame Oduro
  * interactive - returns true if the shell is in interactive mode
  * @info: struct address
  *
