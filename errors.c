@@ -1,6 +1,8 @@
 #include "shell.h"
 
 /**
+ * Auth: Alice Agyemang
+ *   Benjamin Kwame Oduro
  * _eputs - prints an input string to stderr
  * @str: the string to be printed
  *
