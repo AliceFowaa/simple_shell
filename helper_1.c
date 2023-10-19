@@ -1,102 +1,113 @@
 #include "shell.h"
 
 /**
- * Auth: Alice Agyemang
- *   Benjamin Kwame Oduro
- * _strcmp - compare two strings
- * @first: first string to be compared
- * @second: second string to be compared
- *
- * Return: difference of the two strings
+ * free_recurrent_data - free the fields needed each loop
+ * @data: struct of the program's data
+ * Return: Nothing
  */
-int _strcmp(char *first, char *second)
+void free_recurrent_data(data_of_program *data)
 {
-int i = 0;
+if (data->tokens)
+free_array_of_pointers(data->tokens);
+if (data->input_line)
+free(data->input_line);
+if (data->command_name)
+free(data->command_name);
 
-while (first[i] != '\0')
-{
-if (first[i] != second[i])
-break;
-i++;
-}
-return (first[i] - second[i]);
+data->input_line = NULL;
+data->command_name = NULL;
+data->tokens = NULL;
 }
 
 /**
- * _strcat - concatenates two strings
- * @destination: string to be concatenated to
- * @source: string to concatenate
- *
- * Return: address of the new string
+ * free_all_data - free all field of the data
+ * @data: struct of the program's data
+ * Return: Nothing
  */
-char *_strcat(char *destination, char *source)
+void free_all_data(data_of_program *data)
 {
-char *new_string = NULL;
-int len_dest = _strlen(destination);
-int len_source = _strlen(source);
-
-new_string = malloc(sizeof(*new_string) * (len_dest + len_source + 1));
-_strcpy(destination, new_string);
-_strcpy(source, new_string + len_dest);
-new_string[len_dest + len_source] = '\0';
-return (new_string);
+if (data->file_descriptor != 0)
+{
+if (close(data->file_descriptor))
+perror(data->program_name);
+}
+free_recurrent_data(data);
+free_array_of_pointers(data->env);
+free_array_of_pointers(data->alias_list);
 }
 
 /**
- * _strspn - gets the length of a prefix substring
- * @str1: string to be searched
- * @str2: string to be used
- *
- * Return: number of bytes in the initial segment of 5 which are part of accept
+ * free_array_of_pointers - frees each pointer of an array of pointers and the
+ * array too
+ * @array: array of pointers
+ * Return: nothing
  */
-int _strspn(char *str1, char *str2)
+void free_array_of_pointers(char **array)
 {
-int i = 0;
-int match = 0;
+int i;
 
-while (str1[i] != '\0')
+if (array != NULL)
 {
-if (_strchr(str2, str1[i]) == NULL)
-break;
-match++;
-i++;
+for (i = 0; array[i]; i++)
+free(array[i]);
+
+free(array);
+array = NULL;
 }
-return (match);
+}#include "shell.h"
+
+/**
+ * free_recurrent_data - free the fields needed each loop
+ * @data: struct of the program's data
+ * Return: Nothing
+ */
+void free_recurrent_data(data_of_program *data)
+{
+if (data->tokens)
+free_array_of_pointers(data->tokens);
+if (data->input_line)
+free(data->input_line);
+if (data->command_name)
+free(data->command_name);
+
+data->input_line = NULL;
+data->command_name = NULL;
+data->tokens = NULL;
 }
 
 /**
- * _strcspn - computes segment of str1 which consists of characters not in str2
- * @str1: string to be searched
- * @str2: string to be used
- *
- * Return: index at which a char in str1 exists in str2
+ * free_all_data - free all field of the data
+ * @data: struct of the program's data
+ * Return: Nothing
  */
-int _strcspn(char *str1, char *str2)
+void free_all_data(data_of_program *data)
 {
-int len = 0, i;
-
-for (i = 0; str1[i] != '\0'; i++)
+if (data->file_descriptor != 0)
 {
-if (_strchr(str2, str1[i]) != NULL)
-break;
-len++;
+if (close(data->file_descriptor))
+perror(data->program_name);
 }
-return (len);
+free_recurrent_data(data);
+free_array_of_pointers(data->env);
+free_array_of_pointers(data->alias_list);
 }
 
 /**
- * _strchr - locates a char in a string
- * @s: string to be searched
- * @c: char to be checked
- *
- * Return: pointer to the first occurrence of c in s
+ * free_array_of_pointers - frees each pointer of an array of pointers and the
+ * array too
+ * @array: array of pointers
+ * Return: nothing
  */
-char *_strchr(char *s, char c)
+void free_array_of_pointers(char **array)
 {
-int i = 0;
+int i;
 
-for (; s[i] != c && s[i] != '\0'; i++)
-;
+if (array != NULL)
+{
+for (i = 0; array[i]; i++)
+free(array[i]);
 
-return ((s[i] == c) ? (s + i) : NULL);
+free(array);
+array = NULL;
+}
 }
