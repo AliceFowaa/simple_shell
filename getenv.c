@@ -1,6 +1,8 @@
 #include "shell.h"
 
 /**
+ * Auth: Alice Agyemang
+ *   Benjamin Kwame Oduro
  * get_environ - Returns the string array copy of our environment.
  * @info: Structure containing potential arguments. Used to maintain
  *constant function prototype.
