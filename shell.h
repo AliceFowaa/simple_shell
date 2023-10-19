@@ -12,7 +12,7 @@
 #include <fcntl.h>
 #include <errno.h>
 
-/* Constants */
+/* Constants define */
 #define READ_BUF_SIZE 1024
 #define WRITE_BUF_SIZE 1024
 #define BUF_FLUSH -1
