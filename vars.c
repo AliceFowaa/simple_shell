@@ -1,6 +1,8 @@
 #include "shell.h"
 
 /**
+ * Auth: Alice Agyemang
+ *   Benjamin Kwame Oduro
  * is_chain - Tests if the current character in the buffer is a chain delimiter
  * @info: The parameter struct.
  * @buf: The character buffer.
