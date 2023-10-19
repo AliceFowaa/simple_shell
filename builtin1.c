@@ -1,6 +1,8 @@
 #include "shell.h"
 
 /**
+ * Auth: Alice Agyemang
+ *   Benjamin Kwame Oduro
  * _myhistory - displays the history list, one command per line, preceded
  *  by line numbers, starting at 0.
  * @info: Structure containing potential arguments. Used to maintain
