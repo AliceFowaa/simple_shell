@@ -1,6 +1,8 @@
 #include "shell.h"
 
 /**
+ * Auth: Alice Agyemang
+ *   Benjamin Kwame Oduro
  * **strtow - Splits a string into words. Repeat delimiters are ignored.
  * @str: The input string.
  * @d: The delimiter string.
