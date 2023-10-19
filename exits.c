@@ -1,6 +1,8 @@
 #include "shell.h"
 
 /**
+ * Auth: Alice Agyemang
+ *   Benjamin Kwame Oduro
  * _strncpy - copies a string with a length limit
  * @dest: the destination string to be copied to
  * @src: the source string
