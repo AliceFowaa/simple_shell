@@ -1,6 +1,8 @@
 #include "shell.h"
 
 /**
+ * Auth: Alice Agyemang
+ *   Benjamin Kwame Oduro
  * hsh - Main shell loop.
  * @info: Parameter & return info struct.
  * @av: Argument vector from main().
