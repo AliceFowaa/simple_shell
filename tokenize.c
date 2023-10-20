@@ -1,5 +1,7 @@
 #include "shell.h"
 /**
+ * Auth: Alice Agyemang
+ *  Benjamin Kwame Oduro
  * tokenize - this function separate the string using a designed delimiter
  * @data: a pointer to the program's data
  * Return: an array of the different parts of the string
