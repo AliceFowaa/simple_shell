@@ -9,7 +9,6 @@
  *
  * Return: difference of the two strings
  */
-
 int _strcmp(char *first, char *second)
 {
 int i = 0;
@@ -30,7 +29,6 @@ return (first[i] - second[i]);
  *
  * Return: address of the new string
  */
-
 char *_strcat(char *destination, char *source)
 {
 char *new_string =  NULL;
@@ -51,7 +49,6 @@ return (new_string);
  *
  *Return: number of bytes in the initial segment of 5 which are part of accept
  */
-
 int _strspn(char *str1, char *str2)
 {
 int i = 0;
@@ -74,8 +71,6 @@ return (match);
  *
  *Return: index at which a char in str1 exists in str2
  */
-
-
 int _strcspn(char *str1, char *str2)
 {
 int len = 0, i;
@@ -96,7 +91,6 @@ return (len);
  *
  *Return: pointer to the first occurence of c in s
  */
-
 char *_strchr(char *s, char c)
 {
 int i = 0;
@@ -108,4 +102,3 @@ return (s + i);
 else
 return (NULL);
 }
-
