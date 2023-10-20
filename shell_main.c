@@ -1,61 +1,50 @@
-#include "shell.h"
-
-
-char **commands = NULL;
-char *line = NULL;
-char *shell_name = NULL;
-int status = 0;
+#include "header.h"
 
 /**
- * main - the main shell code
- * @argc: number of arguments passed
- * @argv: program arguments to be parsed
- *
- * applies the functions in utils and helpers
- * implements EOF
- * Prints error on Failure
- * Return: 0 on success
+ * main - Entry point to program
+ * @argc: Argument count
+ * @argv: Argument vector
+ * Return: Returns condition
  */
-
-
-int main(int argc __attribute__((unused)), char **argv)
+int main(__attribute__((unused)) int argc, char **argv)
 {
-char **current_command = NULL;
-int i, type_command = 0;
-size_t n = 0;
+	char *input, **cmd, **commands;
+	int count = 0, i, condition = 1, stat = 0;
 
-signal(SIGINT, ctrl_c_handler);
-shell_name = argv[0];
-while (1)
-{
-non_interactive();
-print(" ($) ", STDOUT_FILENO);
-if (getline(&line, &n, stdin) == -1)
-{
-free(line);
-exit(status);
-}
-remove_newline(line);
-remove_comment(line);
-commands = tokenizer(line, ";");
-
-for (i = 0; commands[i] != NULL; i++)
-{
-current_command = tokenizer(commands[i], " ");
-if (current_command[0] == NULL)
-{
-free(current_command);
-break;
-}
-type_command = parse_command(current_command[0]);
-
-/* initializer -   */
-initializer(current_command, type_command);
-free(current_command);
-}
-free(commands);
-}
-free(line);
-
-return (status);
+	if (argv[1] != NULL)
+		read_file(argv[1], argv);
+	signal(SIGINT, signal_to_handle);
+	while (condition)
+	{
+		count++;
+		if (isatty(STDIN_FILENO))
+			prompt();
+		input = _getline();
+		if (input[0] == '\0')
+			continue;
+		history(input);
+		commands = separator(input);
+		for (i = 0; commands[i] != NULL; i++)
+		{
+			cmd = parse_cmd(commands[i]);
+			if (_strcmp(cmd[0], "exit") == 0)
+			{
+				free(commands);
+				exit_bul(cmd, input, argv, count, stat);
+			}
+			else if (check_builtin(cmd) == 0)
+			{
+				stat = handle_builtin(cmd, stat);
+				free(cmd);
+				continue;
+			}
+			else
+				stat = check_cmd(cmd, input, count, argv);
+			free(cmd);
+		}
+		free(input);
+		free(commands);
+		wait(&stat);
+	}
+	return (stat);
 }

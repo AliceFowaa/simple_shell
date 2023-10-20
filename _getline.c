@@ -1,96 +1,106 @@
-#include "shell.h"
+#include "header.h"
 
 /**
-* _getline - read one line from the prompt.
-* @data: struct for the program's data
-*
-* Return: reading counting bytes.
-*/
-int _getline(data_of_program *data)
+ * _getline - read input from standard input by user
+ * Return: the input on a buffer
+ */
+char *_getline()
 {
-	char buff[BUFFER_SIZE] = {'\0'};
-	static char *array_commands[10] = {NULL};
-	static char array_operators[10] = {'\0'};
-	ssize_t bytes_read, i = 0;
+	int i, rd, buffsize = BUFSIZE;
+	char c = 0, *buffer, *buf;
 
-	/* check if doesnot exist more commands in the array */
-	/* and checks the logical operators */
-	if (!array_commands[0] || (array_operators[0] == '&' && errno != 0) ||
-		(array_operators[0] == '|' && errno == 0))
+	buffer = malloc(buffsize);
+	if (buffer == NULL)
 	{
-		/*free the memory allocated in the array if it exists */
-		for (i = 0; array_commands[i]; i++)
+		free(buffer);
+		return (NULL);
+	}
+	for (i = 0; c != EOF && c != '\n'; i++)
+	{
+		fflush(stdin);
+		rd = read(STDIN_FILENO, &c, 1);
+		if (rd == 0)
 		{
-			free(array_commands[i]);
-			array_commands[i] = NULL;
+			free(buffer);
+			exit(EXIT_SUCCESS);
 		}
-
-		/* read from the file descriptor int to buff */
-		bytes_read = read(data->file_descriptor, &buff, BUFFER_SIZE - 1);
-		if (bytes_read == 0)
-			return (-1);
-
-		/* split lines for \n or ; */
-		i = 0;
-		do {
-			array_commands[i] = str_duplicate(_strtok(i ? NULL : buff, "\n;"));
-			/*checks and split for && and || operators*/
-			i = check_logic_ops(array_commands, i, array_operators);
-		} while (array_commands[i++]);
+		buffer[i] = c;
+		if (buffer[0] == '\n')
+			return (enter(buffer));
+		if (i >= buffsize)
+		{
+			buffer = realloc(buffer, (buffsize + 2));
+			if (buffer == NULL)
+			{
+				free(buffer);
+				return (NULL);
+			}
+		}
 	}
-
-	/*obtains the next command (command 0) and remove it for the array*/
-	data->input_line = array_commands[0];
-	for (i = 0; array_commands[i]; i++)
-	{
-		array_commands[i] = array_commands[i + 1];
-		array_operators[i] = array_operators[i + 1];
-	}
-
-	return (str_length(data->input_line));
+	buffer[i] = '\0';
+	buf = space(buffer);
+	free(buffer);
+	hashtag_handler(buf);
+	return (buf);
 }
 
+/**
+ * enter - Handles newline character input
+ * @string: String to be handled
+ * Return: Empty string
+ */
+char *enter(char *string)
+{
+	free(string);
+	return ("\0");
+}
 
 /**
-* check_logic_ops - checks and split for && and || operators
-* @array_commands: array of the commands.
-* @i: index in the array_commands to be checked
-* @array_operators: array of the logical operators for each previous command
-*
-* Return: index of the last command in the array_commands.
-*/
-int check_logic_ops(char *array_commands[], int i, char array_operators[])
+ * space - Modifies the input string to remove preceeding whitespaces
+ * @str: Input to be modifies
+ * Return: Returns the modified string
+ */
+char *space(char *str)
 {
-	char *temp = NULL;
-	int j;
+	int i, j = 0;
+	char *buff;
 
-	/* checks for the & char in the command line*/
-	for (j = 0; array_commands[i] != NULL  && array_commands[i][j]; j++)
+	buff = malloc(sizeof(char) * (_strlen(str) + 1));
+	if (buff == NULL)
 	{
-		if (array_commands[i][j] == '&' && array_commands[i][j + 1] == '&')
+		free(buff);
+		return (NULL);
+	}
+	for (i = 0; str[i] == ' '; i++)
+		;
+	for (; str[i + 1] != '\0'; i++)
+	{
+		buff[j] = str[i];
+		j++;
+	}
+	buff[j] = '\0';
+	if (buff[0] == '\0' || buff[0] == '#')
+	{
+		free(buff);
+		return ("\0");
+	}
+	return (buff);
+}
+
+/**
+ * hashtag_handler - function that removes everything after '#'
+ * @buff: input buffer
+ * Return: nothing
+ */
+void hashtag_handler(char *buff)
+{
+	int i;
+
+	for (i = 0; buff[i] != '\0'; i++)
+	{
+		if (buff[i] == '#' && buff[i - 1] == ' ' && buff[i + 1] == ' ')
 		{
-			/* split the line when chars && was found */
-			temp = array_commands[i];
-			array_commands[i][j] = '\0';
-			array_commands[i] = str_duplicate(array_commands[i]);
-			array_commands[i + 1] = str_duplicate(temp + j + 2);
-			i++;
-			array_operators[i] = '&';
-			free(temp);
-			j = 0;
-		}
-		if (array_commands[i][j] == '|' && array_commands[i][j + 1] == '|')
-		{
-			/* split the line when chars || was found */
-			temp = array_commands[i];
-			array_commands[i][j] = '\0';
-			array_commands[i] = str_duplicate(array_commands[i]);
-			array_commands[i + 1] = str_duplicate(temp + j + 2);
-			i++;
-			array_operators[i] = '|';
-			free(temp);
-			j = 0;
+			buff[i] = '\0';
 		}
 	}
-	return (i);
 }
