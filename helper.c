@@ -1,6 +1,8 @@
 #include "shell.h"
 
 /**
+ * Auth: Alice Agyemang
+ *  Benjamin Kwame Oduro
  * tokenizer - tokenizes input and stores it into an array
  *@input_string: input to be parsed
  *@delim: delimiter to be used, needs to be one character string
