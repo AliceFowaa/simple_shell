@@ -1,6 +1,8 @@
 #include "shell.h"
 
 /**
+ * Auth: Alice Agyemang
+ *  Benjamin Kwame Oduro
  *env - prints the current_environnement
  *@tokenized_command: command entered
  *
